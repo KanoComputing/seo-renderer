@@ -1,0 +1,14 @@
+{
+    "port": 3000,
+    "caching": {
+        "enabled": true,
+        "table": "seo-render-cache-staging",
+        "region": "us-west-1",
+        "endpoint": "https://dynamodb.us-west-1.amazonaws.com"
+    },
+    "extraParams": {
+        "apps-staging.kano.me": {
+            "dom": "shady"
+        }
+    }
+}
