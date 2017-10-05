@@ -15,7 +15,11 @@ pipeline {
         stage('install dependencies') {
             steps {
                 script {
-                    sh "npm i"
+                    def KEY = "-i ~/.ssh/kano-production-us.pem"
+                    sh "eval $(ssh-agent)"
+                    sh "ssh-add ${KEY}"
+                    sh "rsync -avz --exclude='.git/' ./ ubuntu@render-staging.kano.me:/opt/seo-render"
+                    remote "cd /opt/seo-render && npm i"
                 }
             }
         }
@@ -30,9 +34,21 @@ pipeline {
                 }
             }
         }
+
+        // Install the bower dependencies of the component
+        stage('restart server') {
+            steps {
+                remote "sudo supervisorctl restart seo-render"
+            }
+        }
     }
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '20'))
     }
+}
+
+def remote (cmd) {
+    sh "ssh ubuntu@render-staging.kano.me '${cmd}'"
+
 }

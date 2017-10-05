@@ -9,6 +9,9 @@
     "extraParams": {
         "apps-staging.kano.me": {
             "dom": "shady"
+        },
+        "hoc-staging.kano.me": {
+            "wc-inject-shadydom": "true"
         }
     }
 }
