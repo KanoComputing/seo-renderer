@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     def KEY = "-i ~/.ssh/kano-production-us.pem"
-                    sh "eval $(ssh-agent)"
+                    sh "eval \$(ssh-agent)"
                     sh "ssh-add ${KEY}"
                     sh "rsync -avz --exclude='.git/' ./ ubuntu@render-staging.kano.me:/opt/seo-render"
                     remote "cd /opt/seo-render && npm i"
