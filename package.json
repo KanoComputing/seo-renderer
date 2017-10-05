@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ava test/main.test.js"
+    "test": "ava test/main.test.js",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
